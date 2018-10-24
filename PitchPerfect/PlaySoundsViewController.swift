@@ -28,8 +28,7 @@ class PlaySoundsViewController: UIViewController {
 	
 	enum ButtonType: Int { case slow = 0, fast, chipmunk, vader, echo, reverb }
 	
-	@IBAction func playSoundForButton(_ sender: UIButton)
-	{
+	@IBAction func playSoundForButton(_ sender: UIButton) {
 		print("play sound for button pressed")
 		
 		switch(ButtonType(rawValue: sender.tag)!) {
@@ -50,8 +49,7 @@ class PlaySoundsViewController: UIViewController {
 		configureUI(.playing)
 	}
 	
-	@IBAction func stopButtonPressed(_ sender: AnyObject)
-	{
+	@IBAction func stopButtonPressed(_ sender: AnyObject) {
 		print("stop audio button pressed")
 		
 		stopAudio()
@@ -76,24 +74,8 @@ class PlaySoundsViewController: UIViewController {
 		configureUI(.notPlaying)
 	}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		stopAudio()
 	}
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

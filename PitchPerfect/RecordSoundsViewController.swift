@@ -22,7 +22,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
-		print("viewDidLoad called")
 		stopRecordingButton.isEnabled = false
 
 
@@ -30,7 +29,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		print("viewWillAppear called")
 	}
 	
 	
@@ -41,8 +39,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 		let recordingName = "recordedVoice.wav"
 		let pathArray = [dirPath, recordingName]
 		let filePath = URL(string: pathArray.joined(separator: "/"))
-		
-		print(filePath!)
 		
 		let session = AVAudioSession.sharedInstance()
 		try! session.setCategory(AVAudioSessionCategoryPlayAndRecord, with:AVAudioSessionCategoryOptions.defaultToSpeaker)
@@ -63,29 +59,22 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 	}
 	
 	// courtesy of Udacity code reviewer
-	func configureUI(isRecording: Bool)
-	{
+	func configureUI(isRecording: Bool)	{
 		stopRecordingButton.isEnabled = isRecording // to disable the button
 		recordButton.isEnabled = !isRecording // to enable the button
 		recordingLabel.text = !isRecording ? "Tap to Record" : "Recording in Progress"
 	}
 	
 	func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-		print("finished recording")
-		
-		if flag
-		{
+		if flag {
 			performSegue(withIdentifier: "stopRecording", sender: audioRecorder.url)
-		}
-		else
-		{
+		} else {
 			print("recording was not successful")
 		}
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == segueIdentifier
-		{
+		if segue.identifier == segueIdentifier {
 			let playSoundsVC = segue.destination as! PlaySoundsViewController
 			let recordedAudioURL = sender as! URL
 			playSoundsVC.recordedAudioURL = recordedAudioURL
